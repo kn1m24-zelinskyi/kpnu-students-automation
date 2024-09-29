@@ -1,0 +1,8 @@
+singleQuote: true
+useTabs: false
+tabWidth: 2
+bracketSpacing: true
+trailingComma: all
+printWidth: 150
+semi: true
+endOfLine: auto

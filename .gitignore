@@ -1,0 +1,21 @@
+# Node artifact files
+node_modules/
+dist/
+
+# Log files
+*.log
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+
+#Playwright actifact files
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/artifacts/
+
+#Enviroment variables file
+.env*
