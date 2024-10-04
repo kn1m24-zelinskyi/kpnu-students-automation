@@ -1,16 +1,8 @@
 import { defineConfig, devices } from '@playwright/test';
 import dotenv from 'dotenv';
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
 
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
 dotenv.config();
-/**
- * See https://playwright.dev/docs/test-configuration.
- */
+
 export default defineConfig({
   timeout: 60000,
   testDir: './tests',
@@ -22,31 +14,44 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 4 : undefined,
-  /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
-  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+  // Shared settings for all the projects below.
   use: {
+    actionTimeout: 25000,
+    navigationTimeout: 60000,
     baseURL: process.env.BASE_URL,
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
-    video: 'on',
+    video: 'retain-on-failure',
   },
-
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      name: 'Chrome',
+      use: { ...devices['Desktop Chrome'], browserName: 'chromium' },
     },
 
     {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      name: 'Firefox',
+      use: { ...devices['Desktop Firefox'], browserName: 'firefox' },
     },
 
     {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      name: 'Safari',
+
+      use: { ...devices['Desktop Safari'], browserName: 'webkit' },
+    },
+    {
+      name: 'iPhone 12 Chrome',
+      use: { ...devices['iPhone 12 Pro'], browserName: 'chromium', isMobile: true },
+    },
+    {
+      name: 'iPhone 12 Safari',
+      use: { ...devices['iPhone 12 Pro'], browserName: 'webkit', isMobile: true },
+    },
+    {
+      name: 'iPhone 12 Firefox',
+      use: { ...devices['iPhone 12 Pro'], browserName: 'firefox', isMobile: true },
     },
   ],
 });
