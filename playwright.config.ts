@@ -49,9 +49,5 @@ export default defineConfig({
       name: 'iPhone 12 Safari',
       use: { ...devices['iPhone 12 Pro'], browserName: 'webkit', isMobile: true },
     },
-    {
-      name: 'iPhone 12 Firefox',
-      use: { ...devices['iPhone 12 Pro'], browserName: 'firefox', isMobile: true },
-    },
   ],
 });
