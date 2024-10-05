@@ -1,9 +1,5 @@
 import test, { expect, Locator, Page } from '@playwright/test';
 import BasePage from './basePage';
-import { services_Const } from '../constants/servicesConst';
-
-//initialize const values after import
-const { pageState } = services_Const;
 
 export default class HomePage extends BasePage {
   protected readonly isMobile: boolean;
@@ -30,23 +26,26 @@ export default class HomePage extends BasePage {
   // Actions
   async load() {
     await test.step(`Wait until home page DOM content loaded`, async () => {
-      await this.goTo(`${process.env.BASE_URL}`);
-      await this.waitUntilLoad(pageState.DOM_CONTENT_LOADED);
+      await this.goTo('');
+      await this.waitUntilLoad(this.PAGE_STATE.DOM_CONTENT_LOADED);
     });
   }
 
   async clickOnSignInLink() {
+    await this.waitUntilLoad(this.PAGE_STATE.DOM_CONTENT_LOADED);
     await test.step(`Click on "Sign in" link.`, async () => {
       await this.homePageLocators.signInLink.click();
     });
   }
 
   async clickOnCreateAnAccountLink() {
+    await this.waitUntilLoad(this.PAGE_STATE.DOM_CONTENT_LOADED);
     await test.step(`Click on "Create an account" link.`, async () => {
       await this.homePageLocators.createAnAccountLink.click();
       await this.verifyPageURL('customer/account/create/');
     });
   }
+
   // Verify methods
 
   async verifyGlobalMessageDemo(expectedMessage: string) {
