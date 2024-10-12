@@ -1,6 +1,6 @@
-import { test } from '../../pages/testExtender';
-import { LoginData } from '../../types/userTypes';
-import { fakerDataGenerator } from '../../utils/helpers/faker';
+import { test } from '@testExtenter';
+import { fakerDataGenerator } from '@utils/helpers/generatedData';
+import { LoginData } from 'src/types/userTypes';
 
 test.describe(`Verify login page`, async () => {
   test.beforeEach(async ({ homePage }) => {

@@ -1,7 +1,6 @@
-import { Locator, Page } from '@playwright/test';
-import BasePage from '../basePage';
-import { test } from '../testExtender';
-import { LoginData } from '../../types/userTypes';
+import test, { Locator, Page } from '@playwright/test';
+import BasePage from '@pages/basePage';
+import { LoginData } from 'src/types/userTypes';
 
 export class LoginPage extends BasePage {
   private readonly PAGE_TITLE = 'Customer Login';

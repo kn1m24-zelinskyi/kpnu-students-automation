@@ -1,6 +1,6 @@
 import test, { Locator, Page } from '@playwright/test';
-import BasePage from '../basePage';
-import { CreateUserData } from '../../types/userTypes';
+import BasePage from '@pages/basePage';
+import { CreateUserData } from 'src/types/userTypes';
 
 export default class RegistrationPage extends BasePage {
   private readonly PAGE_TITLE: 'Create New Customer Account';
