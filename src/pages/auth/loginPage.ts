@@ -1,6 +1,6 @@
 import test, { Locator, Page } from '@playwright/test';
 import BasePage from '@pages/basePage';
-import { LoginData } from 'src/types/userTypes';
+import { LoginDataType } from 'src/types/userTypes';
 
 export class LoginPage extends BasePage {
   private readonly PAGE_TITLE = 'Customer Login';
@@ -32,7 +32,7 @@ export class LoginPage extends BasePage {
 
   //Actions
 
-  async fillAndSubmitLoginForm(loginData: LoginData) {
+  async fillAndSubmitLoginForm(loginData: LoginDataType) {
     await this.waitUntilLoad(this.PAGE_STATE.DOM_CONTENT_LOADED);
     await test.step(`Fill and submit login form.`, async () => {
       await this.fillLoginForm(loginData);
@@ -68,7 +68,7 @@ export class LoginPage extends BasePage {
     });
   }
 
-  async fillLoginForm(loginData: LoginData) {
+  async fillLoginForm(loginData: LoginDataType) {
     await this.waitUntilLoad(this.PAGE_STATE.DOM_CONTENT_LOADED);
     await test.step(`Fill login form.`, async () => {
       await this.fillEmail(loginData.email);

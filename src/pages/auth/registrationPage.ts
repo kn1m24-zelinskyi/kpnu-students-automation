@@ -1,6 +1,6 @@
 import test, { Locator, Page } from '@playwright/test';
 import BasePage from '@pages/basePage';
-import { CreateUserData } from 'src/types/userTypes';
+import { CreateUserType } from 'src/types/userTypes';
 
 export default class RegistrationPage extends BasePage {
   private readonly PAGE_TITLE: 'Create New Customer Account';
@@ -33,19 +33,19 @@ export default class RegistrationPage extends BasePage {
 
   //Actions
 
-  async fillAndSubmitRegistrationForm(userData: CreateUserData) {
+  async fillAndSubmitRegistrationForm(userData: CreateUserType) {
     await this.waitUntilLoad(this.PAGE_STATE.DOM_CONTENT_LOADED);
-    await test.step(`Fill and submit registration form for ${userData.firstName} ${userData.lastName}`, async () => {
+    await test.step(`Fill and submit registration form for ${userData.firstname} ${userData.lastname}`, async () => {
       await this.fillRegistrationForm(userData);
       await this.clickOnCreateAnAccountButton();
     });
   }
 
-  async fillRegistrationForm(userData: CreateUserData) {
+  async fillRegistrationForm(userData: CreateUserType) {
     await this.waitUntilLoad(this.PAGE_STATE.DOM_CONTENT_LOADED);
-    await test.step(`Fill registration form for ${userData.firstName} ${userData.lastName}`, async () => {
-      await this.locatorList.firstNameInput.fill(userData.firstName);
-      await this.locatorList.lastNameInput.fill(userData.lastName);
+    await test.step(`Fill registration form for ${userData.firstname} ${userData.lastname}`, async () => {
+      await this.locatorList.firstNameInput.fill(userData.firstname);
+      await this.locatorList.lastNameInput.fill(userData.lastname);
       await this.locatorList.emailInput.fill(userData.email);
       await this.locatorList.passwordInput.fill(userData.password);
       await this.locatorList.confirmPasswordInput.fill(userData.password);

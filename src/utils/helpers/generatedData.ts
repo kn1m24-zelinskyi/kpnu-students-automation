@@ -1,11 +1,11 @@
 import { faker } from '@faker-js/faker';
-import { CreateUserData } from '../../types/userTypes';
+import { CreateUserType } from 'src/types/userTypes';
 
 class FakerData {
-  generateNewUserData = (): CreateUserData => {
+  generateNewUserData = (): CreateUserType => {
     return {
-      firstName: faker.person.firstName(),
-      lastName: faker.person.lastName(),
+      firstname: faker.person.firstName(),
+      lastname: faker.person.lastName(),
       email: 'user' + `${Date.now()}` + '@example.com',
       password: 'Test_12345',
     };
