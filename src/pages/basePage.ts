@@ -1,5 +1,5 @@
 import { expect, Locator, Page } from '@playwright/test';
-import { test } from './testExtender';
+import { test } from '@testExtenter';
 
 export default class BasePage {
   protected readonly PAGE_STATE = {

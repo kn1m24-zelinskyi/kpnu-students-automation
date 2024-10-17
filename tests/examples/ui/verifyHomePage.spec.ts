@@ -1,5 +1,5 @@
-import { uiConst } from '../../constants/uiConst';
-import { test } from '../../pages/testExtender';
+import { test } from '@testExtenter';
+import { uiConst } from '@utils/constants/uiConst';
 
 test.describe('Verify website home page.', async () => {
   const { globalMessageDemo } = uiConst;
