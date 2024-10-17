@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test desktop": "npx playwright test tests/examples --project=Chrome --project=Firefox --project=Safari",
-    "test desktop headed": "npx playwright test tests/examples --project=Chrome --project=Firefox --project=Safari --headed"
+    "test api": "npx playwright test tests/examples/api --project=api",
+    "test desktop": "npx playwright test tests/examples/ui  --project=Chrome --project=Firefox --project=Safari ",
+    "test desktop headed": "npx playwright test tests/examples/ui --project=Chrome --project=Firefox --project=Safari --headed"
   },
   "keywords": [],
   "author": "",
