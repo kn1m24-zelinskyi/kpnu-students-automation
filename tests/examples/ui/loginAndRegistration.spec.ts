@@ -1,6 +1,6 @@
 import { test } from '@testExtenter';
 import { fakerDataGenerator } from '@utils/helpers/generatedData';
-import { LoginData } from 'src/types/userTypes';
+import { LoginDataType } from 'src/types/userTypes';
 
 test.describe(`Verify login page`, async () => {
   test.beforeEach(async ({ homePage }) => {
@@ -10,14 +10,14 @@ test.describe(`Verify login page`, async () => {
     const registrationData = fakerDataGenerator.generateNewUserData();
     await homePage.clickOnCreateAnAccountLink();
     await registrationPage.fillAndSubmitRegistrationForm(registrationData);
-    await headerComponent.verifyLoggedInMessage(registrationData.firstName + ' ' + registrationData.lastName);
+    await headerComponent.verifyLoggedInMessage(registrationData.firstname + ' ' + registrationData.lastname);
   });
 
   // This test will skipped when you should run test.
   // Set up .env password and email if you already have existed account.
   // Delete .skip if you will run this test case
   test.skip(`Login user with valid credentials`, async ({ homePage, loginPage, headerComponent }) => {
-    const loginData: LoginData =
+    const loginData: LoginDataType =
       process.env.email && process.env.password
         ? { email: process.env.email, password: process.env.password }
         : { email: 'user1728165794812@example.com', password: 'Test_12345' };
