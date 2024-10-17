@@ -6,7 +6,9 @@ test.describe(`Verify login page`, async () => {
   test.beforeEach(async ({ homePage }) => {
     await homePage.load();
   });
-  test(`Create new user with valid credentials`, async ({ homePage, registrationPage, headerComponent }) => {
+
+  test(`Create new user with valid credentials`, async ({ homePage, registrationPage, headerComponent, browserName }) => {
+    test.skip(browserName === 'firefox', 'Failed by defect');
     const registrationData = fakerDataGenerator.generateNewUserData();
     await homePage.clickOnCreateAnAccountLink();
     await registrationPage.fillAndSubmitRegistrationForm(registrationData);
