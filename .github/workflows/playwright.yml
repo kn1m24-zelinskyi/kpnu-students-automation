@@ -2,7 +2,7 @@ name: Playwright Tests
 run-name: ${{ github.actor }} is testing on KPNU students automation
 on:
   push:
-    branches: [itprojectmanagement]
+    branches: [itprojectmanagement, lz*]
   pull_request:
     branches: [main, master, itprojectmanagement]
 jobs:
