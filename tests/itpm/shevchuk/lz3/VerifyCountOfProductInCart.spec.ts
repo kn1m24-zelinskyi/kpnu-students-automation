@@ -5,9 +5,9 @@ import { getUserApiPayload } from '@utils/data/userApiPayloads';
 test.describe(`Add items to cart related scenarios`, async () => {
     const createdCustomerPayload = getUserApiPayload();
     const product = {
-        productName: 'Strive Shoulder Pack',
-        ProductQuantity: 2,
-        ProductCountInCart: '2'
+        name: 'Strive Shoulder Pack',
+        quantity: 2,
+        countInCart: '2'
     };
     let customerId: string;
     test.beforeEach(async ({ homePage }) => {
@@ -21,11 +21,11 @@ test.describe(`Add items to cart related scenarios`, async () => {
         await homePage.clickOnSignInLink();
         await loginPage.fillLoginForm({ email: createdCustomerPayload.customer.email, password: createdCustomerPayload.password });
         await loginPage.clickOnSignInButton();
-        await homePage.searchItem(product.productName);
-        await homePage.verifySearchedProductName(product.productName);
-        await homePage.clickOnSearchedProductImage(product.productName);
-        await productPage.selectProductQuantity(product.ProductQuantity);
+        await homePage.searchItem(product.name);
+        await homePage.verifySearchedProductName(product.name);
+        await homePage.clickOnSearchedProductImage(product.name);
+        await productPage.selectProductQuantity(product.quantity);
         await productPage.clickOnAddToCartButton();
-        await productPage.verifyProductCountInCart(product.ProductCountInCart);
+        await productPage.verifyProductCountInCart(product.countInCart);
     });
 });
