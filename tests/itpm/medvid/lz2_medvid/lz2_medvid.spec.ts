@@ -10,7 +10,8 @@ test.describe(`Test setup before testing`, async () => {
     await page.goto(`${process.env.BASE_URL}`);
     await page.getByRole('link', { name: 'Sign In' }).click();
     await page.waitForTimeout(7);
-    await expect(page.getByText('Customer Login')).toBeVisible();});
+    await expect(page.getByText('Customer Login')).toBeVisible();
+  });
   test(`Verify "Create an account" works properly`, async ({ page }) => {
     await page.goto(`${process.env.BASE_URL}`);
     await page.getByRole('banner').getByRole('link', { name: 'Create an Account' }).click();
