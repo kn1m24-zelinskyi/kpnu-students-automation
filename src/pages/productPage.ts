@@ -35,6 +35,7 @@ export default class ProductPage extends BasePage {
   }
 
   // Actions
+
   async selectProductSize(size: string) {
     await test.step(`Select product size: ${size}`, async () => {
       await this.waitUntilLoad(this.PAGE_STATE.DOM_CONTENT_LOADED);
@@ -73,8 +74,15 @@ export default class ProductPage extends BasePage {
     });
   }
 
-  // Verify methods
+  async clickOnAddToWishListButton() {
+    await test.step('Click on "Add to wishlist" button', async () => {
+      await this.waitUntilLoad(this.PAGE_STATE.DOM_CONTENT_LOADED);
+      await this.page.waitForTimeout(1000);
+      await this.productPageLocators.addToWishListIcon.click();
+    });
+  }
 
+  // Verify methods
   async verifyProductName(expectedName: string) {
     await test.step(`Verify product name to be : ${expectedName} `, async () => {
       await this.waitUntilLoad(this.PAGE_STATE.DOM_CONTENT_LOADED);
@@ -101,6 +109,16 @@ export default class ProductPage extends BasePage {
     await test.step(`Verify product added to compare list. Expected products quantity in compare list ${expectedItems} `, async () => {
       await this.waitUntilLoad(this.PAGE_STATE.DOM_CONTENT_LOADED);
       await expect(this.productPageLocators.productCountInCompareListText).toHaveText(expectedRegex, { timeout: 15000 });
+    });
+  }
+
+  async verifyProductInWishlistByName(productName: string) {
+    await test.step(`Verify product "${productName}" is added to Wishlist`, async () => {
+      // Локатор для повідомлення про успішне додавання до списку бажаного
+      const successMessageLocator = this.page.locator('div.message-success.success.message');
+
+      // Очікуємо, що повідомлення буде містити правильний текст
+      await expect(successMessageLocator).toContainText(`${productName} has been added to your Wish List.`);
     });
   }
 }
