@@ -32,6 +32,6 @@ test.describe(`Add product to wishlist scenarios`, async () => {
 
     await productPage.clickOnAddToWishListButton();
 
-    await productPage.verifyProductInWishlistByName(heroHoodie.name);
+    await productPage.verifyAddToWishlistSuccessMessage(heroHoodie.name);
   });
 });
