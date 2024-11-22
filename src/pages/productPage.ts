@@ -15,6 +15,7 @@ export default class ProductPage extends BasePage {
     addToCompare: Locator;
     productCountInCompareListText: Locator;
     productsInCartCounterText: Locator;
+    successMessage: Locator;
   };
   constructor(page: Page) {
     super(page);
@@ -31,6 +32,7 @@ export default class ProductPage extends BasePage {
       addToCompare: this.page.locator('div.product-social-links div[data-role="add-to-links"] a[class="action tocompare"]'),
       productsInCartCounterText: this.page.locator('a[class="action showcart"] span[class="counter-number"]'),
       productCountInCompareListText: this.page.locator('ul[class="compare wrapper"] span[class="counter qty"]'),
+      successMessage: this.page.locator('div.message-success.success.message'),
     };
   }
 
@@ -77,7 +79,7 @@ export default class ProductPage extends BasePage {
   async clickOnAddToWishListButton() {
     await test.step('Click on "Add to wishlist" button', async () => {
       await this.waitUntilLoad(this.PAGE_STATE.DOM_CONTENT_LOADED);
-      await this.page.waitForTimeout(1000);
+      await this.productPageLocators.addToWishListIcon.waitFor({ state: 'visible' });
       await this.productPageLocators.addToWishListIcon.click();
     });
   }
@@ -112,13 +114,11 @@ export default class ProductPage extends BasePage {
     });
   }
 
-  async verifyProductInWishlistByName(productName: string) {
+  async verifyAddToWishlistSuccessMessage(productName: string) {
+    const expectedRegex = new RegExp(`${productName} has been added to your Wish List.`);
     await test.step(`Verify product "${productName}" is added to Wishlist`, async () => {
-      // Локатор для повідомлення про успішне додавання до списку бажаного
-      const successMessageLocator = this.page.locator('div.message-success.success.message');
-
-      // Очікуємо, що повідомлення буде містити правильний текст
-      await expect(successMessageLocator).toContainText(`${productName} has been added to your Wish List.`);
+      await this.waitUntilLoad(this.PAGE_STATE.DOM_CONTENT_LOADED);
+      await expect(this.productPageLocators.successMessage).toHaveText(expectedRegex, { timeout: 15000 });
     });
   }
 }
