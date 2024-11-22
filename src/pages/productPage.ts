@@ -15,6 +15,7 @@ export default class ProductPage extends BasePage {
     addToCompare: Locator;
     productCountInCompareListText: Locator;
     productsInCartCounterText: Locator;
+    successMessage: Locator;
   };
   constructor(page: Page) {
     super(page);
@@ -31,10 +32,12 @@ export default class ProductPage extends BasePage {
       addToCompare: this.page.locator('div.product-social-links div[data-role="add-to-links"] a[class="action tocompare"]'),
       productsInCartCounterText: this.page.locator('a[class="action showcart"] span[class="counter-number"]'),
       productCountInCompareListText: this.page.locator('ul[class="compare wrapper"] span[class="counter qty"]'),
+      successMessage: this.page.locator('div.message-success'),
     };
   }
 
   // Actions
+
   async selectProductSize(size: string) {
     await test.step(`Select product size: ${size}`, async () => {
       await this.waitUntilLoad(this.PAGE_STATE.DOM_CONTENT_LOADED);
@@ -73,8 +76,15 @@ export default class ProductPage extends BasePage {
     });
   }
 
-  // Verify methods
+  async clickOnAddToWishListButton() {
+    await test.step('Click on "Add to wishlist" button', async () => {
+      await this.waitUntilLoad(this.PAGE_STATE.DOM_CONTENT_LOADED);
+      await this.productPageLocators.addToWishListIcon.waitFor({ state: 'visible' });
+      await this.productPageLocators.addToWishListIcon.click();
+    });
+  }
 
+  // Verify methods
   async verifyProductName(expectedName: string) {
     await test.step(`Verify product name to be : ${expectedName} `, async () => {
       await this.waitUntilLoad(this.PAGE_STATE.DOM_CONTENT_LOADED);
@@ -101,6 +111,14 @@ export default class ProductPage extends BasePage {
     await test.step(`Verify product added to compare list. Expected products quantity in compare list ${expectedItems} `, async () => {
       await this.waitUntilLoad(this.PAGE_STATE.DOM_CONTENT_LOADED);
       await expect(this.productPageLocators.productCountInCompareListText).toHaveText(expectedRegex, { timeout: 15000 });
+    });
+  }
+
+  async verifyAddToWishlistSuccessMessage(productName: string) {
+    const expectedRegex = new RegExp(`${productName} has been added to your Wish List.`);
+    await test.step(`Verify product "${productName}" is added to Wishlist`, async () => {
+      await this.waitUntilLoad(this.PAGE_STATE.DOM_CONTENT_LOADED);
+      await expect(this.productPageLocators.successMessage).toHaveText(expectedRegex, { timeout: 15000 });
     });
   }
 }
