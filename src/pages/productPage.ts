@@ -32,7 +32,7 @@ export default class ProductPage extends BasePage {
       addToCompare: this.page.locator('div.product-social-links div[data-role="add-to-links"] a[class="action tocompare"]'),
       productsInCartCounterText: this.page.locator('a[class="action showcart"] span[class="counter-number"]'),
       productCountInCompareListText: this.page.locator('ul[class="compare wrapper"] span[class="counter qty"]'),
-      successMessage: this.page.locator('div.message-success.success.message'),
+      successMessage: this.page.locator('div.message-success'),
     };
   }
 
